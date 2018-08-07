@@ -1,0 +1,24 @@
+version: '2'
+
+services:
+    dcShell:
+        build: 
+            context: .
+        image: devopscenter/dcshell
+        container_name: dcShell
+        hostname: dcShell
+        volumes:
+            - dcuser-home:/Users/dcuser
+            - ${LOCAL_SHARED_DIR}/dcShell/home/bash_profile:/Users/dcuser/.bash_profile
+            - ${LOCAL_SHARED_DIR}/dcShell/home/dcConfig/settings:/Users/dcuser/.dcConfig/settings
+            - ${LOCAL_SHARED_DIR}:/Users/dcuser/Google Drive/devops.center
+            - ${HOME}/.ssh:/Users/dcuser/.ssh
+            - ${HOME}/.aws:/Users/dcuser/.aws
+            - ${LOCAL_APPLICATION_DIR}:/Users/dcuser/dev
+        working_dir: "/Users/dcuser"
+
+
+# Must include all named volumes in V2 compose file format.
+volumes:
+    dcuser-home:
+

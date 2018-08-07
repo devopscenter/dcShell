@@ -1,0 +1,52 @@
+The contents in this folder provide a basic docker image that has all the necessary libraries and code needed to 
+run a shell (bash) environment that will be able to run paws and pawscp (two of devops.center utilities).  
+
+
+To build the docker image, cd to the directory containing this file, 
+then  (assuming docker has been installed and running on your machine) execute:
+
+    docker-compose build
+
+NOTE: on Windows use docker-compose.exe instead of docker-compose
+
+To start the container for that image run the following command:
+    docker-compose up -d
+
+This will mount several volumes that will need to exist on the host machine before things will work.  Check out
+the file .env in this directory and assign the directories appropriately.
+
+The variables are:
+
+HOME is the path to the users home directory on the host.  It should suffice to use tilde "~" for any 
+platform (Windows included).  This variable is used to find the users AWS credentials (ie, ~/.aws) and
+the users SSH credentials (ie, ~/.ssh)
+
+LOCAL_SHARED_DIR is the path that contains the dcShell directory.  This is usually in a shared directory, like
+Goggle Drive and would be set up by the devops.center team.  Normally, this would be:
+
+    LOCAL_SHARED_DIR=~/Google Drive/devops.center
+
+LOCAL_APPLICATION_DIR is the directory path that contains the application that you are using with the devops.center
+framework.  This oculd be anywhere but might be something like the following: (for the hypothetical company Quasar)
+
+    LOCAL_APPLICATION_DIR=~/quasar-dev/apps
+
+To enter the shell, execute the script ./connect-dcShell.sh ( or .\connect-dcShell.bat) from the dcShell directory.
+
+Once inside the container you can run paws to access the instances:
+    paws -c
+
+...will list the instances and select the number beside the instance you want to ssh into and hit return
+
+Other commands that you can run to test whether it is working correctly is either
+
+    paws -l  -or-   paws -L
+
+This will just list out the instances or list them out and give the tags that are associated with each.
+
+In order to stop the container execute the following command:
+    docker-compose stop
+
+**NOTE: since the pawscp is running inside the container it won't know the host file(s) that you want to copy so
+you will have to define the TRANSFER_DIR variable in .env to point to the abosolute directory path where the file(s)
+you want to transfer exist. This directory will be mounted as ~/currentHostDir inside the container.

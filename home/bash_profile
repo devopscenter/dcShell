@@ -1,0 +1,4 @@
+alias lf='ls -aCF'
+source $HOME/.dcConfig/settings
+alias pudb='python -m pudb'
+set -o vi

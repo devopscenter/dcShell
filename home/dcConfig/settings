@@ -1,0 +1,29 @@
+dcCloudService=AWS
+dcUTILS=/dc-apps/dcUtils
+CUSTOMER_NAME=sotel
+PROFILE=sotel
+USER_NAME=dcuser
+REGION=us-west-2
+DEV_BASE_DIR=/Users/dcuser/dev
+dcCOMMON_SHARED_DIR="/Users/dcuser/Google Drive"
+
+export dcUTILS
+if [[ -z ${PYTHONPATH} ]]; then
+    export PYTHONPATH=${dcUTILS}/scripts
+elif [[ "${PYTHONPATH}" != *"${dcUTILS}"* ]]; then
+    export PYTHONPATH=${PYTHONPATH}:${dcUTILS}/scripts
+else
+    export PYTHONPATH=${dcUTILS}/scripts
+fi
+
+if [[ -z ${PATH} ]]; then
+    export PATH=${dcUTILS}/scripts
+elif [[ "${PATH}" != *"${dcUTILS}"* ]]; then
+    export PATH=${dcUTILS}:${PATH}
+fi
+unset dcCloudService
+unset CUSTOMER_NAME
+unset PROFILE
+unset USER_NAME
+unset REGION
+unset DEV_BASE_DIR
