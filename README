@@ -1,6 +1,15 @@
 The contents in this folder provide a basic docker image that has all the necessary libraries and code needed to 
 run a shell (bash) environment that will be able to run paws and pawscp (two of devops.center utilities).  
 
+Prerequisites:
+    Need to have set up AWS access on the host machine and that the credentials are found in the
+    appropriate directory in the users home directory (ie, ~/.aws ... tilde is equivilant to the users
+    path to the home directory)
+
+    Need to have access to the devops.center directory as a shared directory in Google Drive
+
+    Need to have docker installed and running
+
 
 To build the docker image, cd to the directory containing this file, 
 then  (assuming docker has been installed and running on your machine) execute:
